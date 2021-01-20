@@ -1,9 +1,20 @@
 
 import os
 from pathlib import Path
+from braintree import Configuration, Environment
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+BRAINTREE_MERCHANT_ID = 'x686xc6rkdppf2c7' # ID продавца.#
+BRAINTREE_PUBLIC_KEY = 'wxrnb3ks652qwcq2' # Публичный ключ.
+BRAINTREE_PRIVATE_KEY = '7c37649303af76503ce23cd922828155' # Секретный ключ
+
+
+Configuration.configure(Environment.Sandbox,
+                        BRAINTREE_MERCHANT_ID,
+                        BRAINTREE_PUBLIC_KEY,
+                        BRAINTREE_PRIVATE_KEY)
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,6 +34,7 @@ CART_SESSION_ID = 'cart'
 # Application definition
 
 INSTALLED_APPS = [
+    'payment',
     'order',
     'cart',
     'shop',
@@ -33,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
